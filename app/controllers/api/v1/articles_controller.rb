@@ -4,8 +4,14 @@ module Api
   module V1
     class ArticlesController < ApplicationController # rubocop:disable Style/Documentation
       before_action :set_article, only: %i[show update destroy add_favorite remove_favorite]
+      after_action :verify_authorized, except: :index
+      after_action :verify_policy_scoped, only: :index
 
-      after_action :verify_authorized
+      def index
+        articles = policy_scope(Article.all)
+
+        render json: articles
+      end
 
       def create
         authorize Article
