@@ -10,7 +10,7 @@ module Api
       def index
         articles = policy_scope(Article.all)
 
-        render json: articles
+        render json: articles, each_serializer: ArticleCollectionSerializer
       end
 
       def create
