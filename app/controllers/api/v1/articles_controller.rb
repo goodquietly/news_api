@@ -3,7 +3,7 @@
 module Api
   module V1
     class ArticlesController < ApplicationController # rubocop:disable Style/Documentation
-      before_action :set_article, only: %i[show update destroy]
+      before_action :set_article, only: %i[show update destroy add_favorite remove_favorite]
 
       after_action :verify_authorized
 
@@ -18,6 +18,22 @@ module Api
         else
           render json: { errors: article.errors.full_messages }
         end
+      end
+
+      def add_favorite
+        authorize @article
+
+        FavoriteAticle.find_or_create_by!(user: current_user, article: @article)
+
+        render json: { message: "Article ##{article.id} added to favorite" }
+      end
+
+      def remove_favorite
+        authorize @article
+
+        FavoriteAticle.find_by(user: current_user, article: @article)&.destroy
+
+        render json: { message: "Article ##{article.id} removed from favorite" }
       end
 
       def show
