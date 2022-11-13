@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       end
 
       resources :articles, except: %i[new edit] do
+        get :unread, on: :collection
         post :favorite, on: :member, action: :add_favorite
         delete :favorite, on: :member, action: :remove_favorite
       end
