@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :articles, exept: %i[new edit] do
+      resources :articles, except: %i[new edit] do
         post :favorite, on: :member, action: :add_favorite
         delete :favorite, on: :member, action: :remove_favorite
       end

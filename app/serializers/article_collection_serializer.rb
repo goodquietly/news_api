@@ -1,5 +1,5 @@
-class ArticleCollectionSerializer < ActiveModelSerializers
-  attributes :id, :title, :body, :user, :published, :created_at
+class ArticleCollectionSerializer < ActiveModel::Serializer
+  attributes :id, :title, :anounce, :user, :published, :created_at
 
   def user
     object.user.email
