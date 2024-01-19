@@ -90,7 +90,7 @@
 git clone https://github.com/goodquietly/news_api.git
 ```
 
-Находясь в папке с игрой cd askme, выполните команду:
+Находясь в папке с игрой `cd news_api`, выполните команду:
 
 ```
 docker-compose up
